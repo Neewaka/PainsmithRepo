@@ -26,12 +26,13 @@ public class EnemyBall : Enemy
         {
             direction = Vector3.right;
         }
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (transform.position.x > 9.5 || transform.position.x < -9.5f)
+        if (transform.position.x > 10 || transform.position.x < -10)
         {
             StartCoroutine(Demolish());
         }
@@ -41,7 +42,8 @@ public class EnemyBall : Enemy
     {
         if (isGrounded && transform.position.x < 9 && transform.position.x > -9)
         {
-            ballRb.velocity = direction * speed;
+            ballRb.velocity = speed * (ballRb.velocity.normalized);
+            ballRb.AddForce(direction * speed * Time.deltaTime);
         }
     }
 
@@ -57,6 +59,5 @@ public class EnemyBall : Enemy
     {
         yield return new WaitForSeconds(1);
         Destroy(gameObject);
-        gameManager.canSpawnBalls = true;
     }
 }

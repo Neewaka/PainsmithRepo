@@ -23,8 +23,9 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (canSpawnBalls)
+        if (!GameObject.FindGameObjectWithTag("Enemy"))
         {
+            //StartCoroutine(NewBalls());
             SpawnBalls();
         }
     }
@@ -69,11 +70,9 @@ public class GameManager : MonoBehaviour
         side *= -1;
     }
 
-    public void BallCanBeSpawned()
+    IEnumerator NewBalls()
     {
-        if (canSpawnBalls)
-        {
-            SpawnBalls();
-        }
+        yield return new WaitForSeconds(2);
+        SpawnBalls();
     }
 }
