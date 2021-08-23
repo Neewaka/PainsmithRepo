@@ -4,21 +4,29 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    float BallPlatformBound = 8;
+    float BallBound = 8;
     float spikeBound = 9;
     [SerializeField] GameObject SpikePrefab;
+    [SerializeField] GameObject SpikedBallPrefab;
+    public bool canSpawnBalls = true;
     Vector3 spikePos;
+    float ballY = 15f;
     float spikeY = 6.01f;
+    int side = 1;
     [SerializeField] float spikeSpawnRate = 12;
 
     void Start()
     {
         InvokeRepeating("SpawnSpikes", 2, spikeSpawnRate);
+        SpawnBalls();
     }
 
     void Update()
     {
-  
+        if (canSpawnBalls)
+        {
+            SpawnBalls();
+        }
     }
 
     public void SpawnSpikes()
@@ -48,5 +56,24 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(2);
         CreateLineOfSpikes(spikeZ, freeSpace);
+    }
+
+    public void SpawnBalls()
+    {
+        for (int i = 8; i > -9; i -= 4)
+        {
+            Vector3 BallPos = new Vector3(BallBound * side, ballY, i);
+            Instantiate(SpikedBallPrefab, BallPos, SpikedBallPrefab.transform.rotation);
+        }
+        canSpawnBalls = false;
+        side *= -1;
+    }
+
+    public void BallCanBeSpawned()
+    {
+        if (canSpawnBalls)
+        {
+            SpawnBalls();
+        }
     }
 }
