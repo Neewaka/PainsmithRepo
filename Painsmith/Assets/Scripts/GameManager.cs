@@ -8,16 +8,19 @@ public class GameManager : MonoBehaviour
     float spikeBound = 9;
     [SerializeField] GameObject SpikePrefab;
     [SerializeField] GameObject SpikedBallPrefab;
+    [SerializeField] GameObject fireballPrefab;
     public bool canSpawnBalls = true;
     Vector3 spikePos;
+    Vector3 fireballSpawn = new Vector3(0, 18, 14);
     float ballY = 15f;
     float spikeY = 6.01f;
     int side = 1;
-    [SerializeField] float spikeSpawnRate = 12;
+    [SerializeField] float spikeSpawnRate = 8;
 
     void Start()
     {
         InvokeRepeating("SpawnSpikes", 2, spikeSpawnRate);
+        InvokeRepeating("SpawnFireballs", 2, 4);
         SpawnBalls();
     }
 
@@ -25,7 +28,6 @@ public class GameManager : MonoBehaviour
     {
         if (!GameObject.FindGameObjectWithTag("Enemy"))
         {
-            //StartCoroutine(NewBalls());
             SpawnBalls();
         }
     }
@@ -55,7 +57,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator SpikeEnum(float spikeZ, float freeSpace)
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1);
         CreateLineOfSpikes(spikeZ, freeSpace);
     }
 
@@ -74,5 +76,13 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(2);
         SpawnBalls();
+    }
+
+    void SpawnFireballs()
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            Instantiate(fireballPrefab, fireballSpawn, fireballPrefab.transform.rotation);
+        }
     }
 }

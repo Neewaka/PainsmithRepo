@@ -9,7 +9,7 @@ public class EnemySpike : Enemy
     [SerializeField] float speed = 0.1f;
     bool active = false;
     bool canBeDestroyed = false;
-    float spikeDelay = 2;
+    float spikeDelay = 1f;
 
     // Start is called before the first frame update
     void Start()
@@ -32,7 +32,14 @@ public class EnemySpike : Enemy
 
     IEnumerator Movement(string direction)
     {
-        yield return new WaitForSeconds(spikeDelay);
+        float delay = spikeDelay;
+
+        if (canBeDestroyed)
+        {
+            delay = spikeDelay * 3;
+        }
+        
+        yield return new WaitForSeconds(delay);
         nextPosition = DirectionMove(direction);
         move = true;
     }

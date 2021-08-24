@@ -150,7 +150,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 56750399}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -7.476263, y: 4.89, z: -6.027582}
+  m_LocalPosition: {x: -7.476263, y: 5, z: -6.027582}
   m_LocalScale: {x: 13, y: 6, z: 13}
   m_Children: []
   m_Father: {fileID: 224231440}
@@ -450,7 +450,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 771802732}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 7.48, z: -6.85}
+  m_LocalPosition: {x: 0, y: 7.25, z: -0.92}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 963194228}
@@ -677,7 +677,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1237142585}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -7.476263, y: 8.5, z: -6.027582}
+  m_LocalPosition: {x: -7.476263, y: 8.57, z: -6.027582}
   m_LocalScale: {x: 20.01, y: 1, z: 20.01}
   m_Children: []
   m_Father: {fileID: 224231440}
@@ -806,5 +806,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpikePrefab: {fileID: 5435554602029759562, guid: a51e83a2d2e811e42a6862aa32b80b24, type: 3}
   SpikedBallPrefab: {fileID: 4724632128886040060, guid: 433bc5e5e2e5a944ebbcb28880536743, type: 3}
+  fireballPrefab: {fileID: 2834532820664369017, guid: 4921821ee25298e4caccc7bc08340e3f, type: 3}
   canSpawnBalls: 1
-  spikeSpawnRate: 10
+  spikeSpawnRate: 5
