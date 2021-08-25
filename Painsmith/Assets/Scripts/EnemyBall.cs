@@ -9,7 +9,6 @@ public class EnemyBall : Enemy
     [SerializeField] bool isGrounded = false;
     GameManager gameManager;
     int side;
-    bool isSpawned = false;
     Vector3 direction;
 
     void Start()
@@ -47,12 +46,14 @@ public class EnemyBall : Enemy
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    protected override void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Floor"))
         {
             isGrounded = true;
         }
+
+        base.OnCollisionEnter(collision);
     }
 
     IEnumerator Demolish()

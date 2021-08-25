@@ -11,12 +11,13 @@ public class EnemyFireball : Enemy
     [SerializeField] GameObject targetPrefab;
     float spawnOffset = 6;
     float spawnY = 6.552089f;
+    Vector3 startSpeed;
 
     void Start()
     {
         player = GameObject.Find("Player");
         target = GetTarget();
-
+        startSpeed = target - transform.position;
     }
 
     // Update is called once per frame
@@ -33,7 +34,11 @@ public class EnemyFireball : Enemy
 
         transform.rotation = rotation;
 
-        transform.Translate(Vector3.forward * speed * Time.deltaTime);
+        //float normSpeed = (float)(System.Math.Sqrt(spawnY*spawnY + (1 + target.z) * (1 + target.z)) * speed) / (float)System.Math.Sqrt(1 + spawnY * spawnY); 
+
+        float normSpeed = startSpeed.magnitude / speed;
+
+        transform.Translate(Vector3.forward * normSpeed * Time.deltaTime);
     }
 
     Vector3 GetTarget()
@@ -44,18 +49,25 @@ public class EnemyFireball : Enemy
 
         Vector3 targetPos = GetRandomPos();
 
+        while (CheckBound(targetPos))
+        {
+            targetPos = GetRandomPos();
+        }
+
         Instantiate(targetPrefab, targetPos, targetPrefab.transform.rotation);
 
         return targetPos;
     }
 
-    private void OnTriggerEnter(Collider other)
+    protected override void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Target") && other.transform.position == target)
         {
             Destroy(other.gameObject);
             Destroy(gameObject);
         }
+
+        base.OnTriggerEnter(other);
     }
 
     Vector3 GetRandomPos()
@@ -71,6 +83,18 @@ public class EnemyFireball : Enemy
         float randomX = Random.Range(leftBoundX, rightBoundX);
         float randomZ = Random.Range(leftBoundZ, rightBoundZ);
 
-        return new Vector3(randomX, spawnY, randomZ);
+        Vector3 newPos = new Vector3(randomX, spawnY, randomZ);
+
+        return newPos;
+    }
+
+    bool CheckBound(Vector3 pos)
+    {
+        if (System.Math.Abs(pos.x) > 9 || System.Math.Abs(pos.z) > 9)
+        {
+            return true;
+        }
+
+        return false;
     }
 }

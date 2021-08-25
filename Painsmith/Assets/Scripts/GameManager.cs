@@ -72,12 +72,6 @@ public class GameManager : MonoBehaviour
         side *= -1;
     }
 
-    IEnumerator NewBalls()
-    {
-        yield return new WaitForSeconds(2);
-        SpawnBalls();
-    }
-
     void SpawnFireballs()
     {
         for (int i = 0; i < 4; i++)

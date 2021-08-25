@@ -21,9 +21,4 @@ public class PlayerController : MonoBehaviour
         gameObject.transform.Translate(Vector3.forward * verticalInput * speed * Time.deltaTime);
         gameObject.transform.Translate(Vector3.right * horizontaInput * speed * Time.deltaTime);
     }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        Debug.Log("Hit");
-    }
 }
