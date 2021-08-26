@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -9,16 +10,19 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject SpikePrefab;
     [SerializeField] GameObject SpikedBallPrefab;
     [SerializeField] GameObject fireballPrefab;
-    public bool canSpawnBalls = true;
+    [SerializeField] GameObject gameOverText;
+    [SerializeField] GameObject restartButton;
     Vector3 spikePos;
     Vector3 fireballSpawn = new Vector3(0, 18, 14);
     float ballY = 15f;
     float spikeY = 6.01f;
     int side = 1;
     [SerializeField] float spikeSpawnRate = 8;
+    
 
     void Start()
     {
+        Time.timeScale = 1;
         InvokeRepeating("SpawnSpikes", 2, spikeSpawnRate);
         InvokeRepeating("SpawnFireballs", 2, 4);
         SpawnBalls();
@@ -68,7 +72,7 @@ public class GameManager : MonoBehaviour
             Vector3 BallPos = new Vector3(BallBound * side, ballY, i);
             Instantiate(SpikedBallPrefab, BallPos, SpikedBallPrefab.transform.rotation);
         }
-        canSpawnBalls = false;
+
         side *= -1;
     }
 
@@ -78,5 +82,17 @@ public class GameManager : MonoBehaviour
         {
             Instantiate(fireballPrefab, fireballSpawn, fireballPrefab.transform.rotation);
         }
+    }
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void GameOver()
+    {
+        Time.timeScale = 0;
+        gameOverText.SetActive(true);
+        restartButton.SetActive(true);
     }
 }

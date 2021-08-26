@@ -11,6 +11,8 @@ public class EnemyFireball : Enemy
     [SerializeField] GameObject targetPrefab;
     float spawnOffset = 6;
     float spawnY = 6.552089f;
+    float delayBeforeStart = 2;
+    bool canMove = false;
     Vector3 startSpeed;
 
     void Start()
@@ -18,12 +20,16 @@ public class EnemyFireball : Enemy
         player = GameObject.Find("Player");
         target = GetTarget();
         startSpeed = target - transform.position;
+        StartCoroutine(StartMoving());
     }
 
     // Update is called once per frame
     void Update()
     {
-        MoveToTarget(target);
+        if (canMove)
+        {
+            MoveToTarget(target);
+        }
     }
 
     void MoveToTarget(Vector3 target)
@@ -65,8 +71,8 @@ public class EnemyFireball : Enemy
             Destroy(gameObject);
         }
 
-        base.OnTriggerEnter(other);
     }
+
 
     Vector3 GetRandomPos()
     {
@@ -94,5 +100,11 @@ public class EnemyFireball : Enemy
         }
 
         return false;
+    }
+
+    IEnumerator StartMoving()
+    {
+        yield return new WaitForSeconds(delayBeforeStart);
+        canMove = true;
     }
 }

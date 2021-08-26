@@ -10,8 +10,7 @@ public class Enemy : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Debug.Log("Hit with " + gameObject.name);
-            other.gameObject.transform.position.Set(other.gameObject.transform.position.x, 10, other.gameObject.transform.position.z);
-            //gameObject.transform.Translate(Vector3.up * 2);
+            TakeDamage();
         }
         
     }
@@ -21,6 +20,13 @@ public class Enemy : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             Debug.Log("HitCol with" + gameObject.name);
+            TakeDamage();
         }
+    }
+
+    protected void TakeDamage()
+    {
+        float currentHP = HealthBarHandler.GetHealthBarValue();
+        HealthBarHandler.SetHealthBarValue(currentHP - 0.333f);
     }
 }

@@ -7,6 +7,7 @@ TagManager:
   - Floor
   - Enemy
   - Target
+  - Fireball
   layers:
   - Default
   - TransparentFX
