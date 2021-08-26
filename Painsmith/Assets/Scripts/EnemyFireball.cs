@@ -34,8 +34,6 @@ public class EnemyFireball : Enemy
 
         transform.rotation = rotation;
 
-        //float normSpeed = (float)(System.Math.Sqrt(spawnY*spawnY + (1 + target.z) * (1 + target.z)) * speed) / (float)System.Math.Sqrt(1 + spawnY * spawnY); 
-
         float normSpeed = startSpeed.magnitude / speed;
 
         transform.Translate(Vector3.forward * normSpeed * Time.deltaTime);
