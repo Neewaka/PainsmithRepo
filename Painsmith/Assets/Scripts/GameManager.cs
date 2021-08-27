@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject fireballPrefab;
     [SerializeField] GameObject gameOverText;
     [SerializeField] GameObject restartButton;
+    [SerializeField] GameObject startButton;
     Vector3 spikePos;
     Vector3 fireballSpawn = new Vector3(0, 18, 14);
     float ballY = 15f;
@@ -22,7 +23,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        Time.timeScale = 1;
+        Time.timeScale = 0;
         InvokeRepeating("SpawnSpikes", 2, spikeSpawnRate);
         InvokeRepeating("SpawnFireballs", 2, 4);
         SpawnBalls();
@@ -92,7 +93,17 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         Time.timeScale = 0;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
         gameOverText.SetActive(true);
         restartButton.SetActive(true);
+    }
+
+    public void StartGame()
+    {
+        Time.timeScale = 1;
+        startButton.SetActive(false);
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 }
