@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyFireball : Enemy
+// INHERITANCE
 {
 
     [SerializeField] float speed = 5;
@@ -10,7 +11,7 @@ public class EnemyFireball : Enemy
     Vector3 target;
     [SerializeField] GameObject targetPrefab;
     float spawnOffset = 6;
-    float spawnY = 6.552089f;
+    float spawnY = 6.566f;
     float delayBeforeStart = 2;
     bool canMove = false;
     Vector3 startSpeed;

@@ -9,8 +9,7 @@ public class Enemy : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Hit with " + gameObject.name);
-            TakeDamage();
+            TakeDamage(3);
         }
         
     }
@@ -19,14 +18,13 @@ public class Enemy : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Debug.Log("HitCol with" + gameObject.name);
-            TakeDamage();
+            TakeDamage(3);
         }
     }
 
-    protected void TakeDamage()
+    protected void TakeDamage(int damage)
     {
         float currentHP = HealthBarHandler.GetHealthBarValue();
-        HealthBarHandler.SetHealthBarValue(currentHP - 0.333f);
+        HealthBarHandler.SetHealthBarValue(currentHP - 0.333f * damage);
     }
 }

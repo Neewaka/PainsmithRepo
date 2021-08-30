@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyTarget : Enemy
+// INHERITANCE
 {
-
+    Vector3 rotation;
     bool playerInRange = false;
+    GameManager gameManager;
 
     protected override void OnTriggerEnter(Collider other)
+    // POLYMORPHISM
     {
         if (other.gameObject.CompareTag("Player")){
             playerInRange = true;
@@ -15,8 +18,7 @@ public class EnemyTarget : Enemy
 
         if (other.gameObject.CompareTag("Fireball") && playerInRange)
         {
-            Debug.Log("Fireball hit");
-            base.TakeDamage();
+            base.TakeDamage(1);
         }
     }
 
@@ -26,6 +28,20 @@ public class EnemyTarget : Enemy
         {
             playerInRange = false;
         }
+    }
+
+    private void Update()
+    {
+        if (gameManager.isGameOn)
+        {
+            transform.Rotate(rotation * Time.deltaTime);
+        }
+    }
+
+    private void Start()
+    {
+        rotation = new Vector3(0, 20, 0);
+        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
     }
 
 }

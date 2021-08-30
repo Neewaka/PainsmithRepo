@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemySpike : Enemy
+// INHERITANCE
 {
     Vector3 nextPosition;
     bool move = false;
@@ -10,6 +11,7 @@ public class EnemySpike : Enemy
     bool active = false;
     bool canBeDestroyed = false;
     float spikeDelay = 1f;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -32,6 +34,7 @@ public class EnemySpike : Enemy
 
     IEnumerator Movement(string direction)
     {
+
         float delay = spikeDelay;
 
         if (canBeDestroyed)

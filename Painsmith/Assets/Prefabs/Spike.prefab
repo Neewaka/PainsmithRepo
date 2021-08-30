@@ -118,6 +118,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.05
+  sound: {fileID: 8300000, guid: 3e70a63952e749f41ac352e13dd6481d, type: 3}
 --- !u!1001 &605606657811417539
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -14,11 +14,13 @@ public class PlayerController : MonoBehaviour
     float rotationY = 0.0f;
     float clampAngle = 80.0f;
     [SerializeField] float sensitivity = 15.0f;
+    AudioSource playerAudio;
 
     void Start()
     {
         playerRb = GameObject.Find("Player").GetComponent<Rigidbody>();
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+        playerAudio = GetComponent<AudioSource>();
     }
 
     void Update()

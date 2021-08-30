@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyBall : Enemy
+// INHERITANCE
 {
     Rigidbody ballRb;
     [SerializeField] float speed = 0.5f;
@@ -47,6 +48,7 @@ public class EnemyBall : Enemy
     }
 
     protected override void OnCollisionEnter(Collision collision)
+    // POLYMORPHISM
     {
         if (collision.gameObject.CompareTag("Floor"))
         {
@@ -54,6 +56,19 @@ public class EnemyBall : Enemy
         }
 
         base.OnCollisionEnter(collision);
+    }
+
+    protected override void OnTriggerEnter(Collider other)
+    // POLYMORPHISM
+    {
+        if (other.gameObject.CompareTag("Target") &&
+            gameObject.transform.position.x == other.transform.position.x &&
+            gameObject.transform.position.z == other.transform.position.z)
+        {
+            Destroy(other.gameObject);
+        }
+
+        base.OnTriggerEnter(other);
     }
 
     IEnumerator Demolish()
