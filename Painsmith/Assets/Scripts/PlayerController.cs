@@ -58,6 +58,11 @@ public class PlayerController : MonoBehaviour
         {
             gameManager.GameOver();
         }
+
+        if (transform.position.y < 2)
+        {
+            gameManager.GameOver();
+        }
     }
 
     
